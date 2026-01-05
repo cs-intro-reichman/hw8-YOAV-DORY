@@ -70,7 +70,7 @@
     public boolean removeFollowee(String name) {
         int i = 0;
         // למצוא את index של name
-        while (i < fCount && !follows[i].equals(name)) {
+        while (i < fCount && follows[i] != null && !follows[i].equals(name)) {
             i++;
         }
         if (i == fCount) return false; // לא נמצא
