@@ -68,24 +68,23 @@
     /** Removes the given name from the follows list of this user. If successful, returns true.
      *  If the name is not in the list, does nothing and returns false. */
     public boolean removeFollowee(String name) {
-        int isfollowing = 0;
-        for(int i = 0; i < maxfCount; i++){
-            if (!follows[i].equals(name)) isfollowing++;
-        }
-        if (isfollowing == 10) return false;
         int i = 0;
-        while (!follows[i].equals(name)) {
-            i++; //i represents the name index
+        // למצוא את index של name
+        while (i < fCount && !follows[i].equals(name)) {
+            i++;
         }
-        for (int j = i+1; j < maxfCount; j++){
-            follows[j-1] = follows[j];
-            if (follows[j] == null) {
-                follows[j-1] = null;
-            }
+        if (i == fCount) return false; // לא נמצא
+
+        // להזיז שמאלה
+        for (int j = i; j < fCount - 1; j++) {
+            follows[j] = follows[j + 1];
         }
+        follows[fCount - 1] = null;
         fCount--;
         return true;
     }
+
+    
 
     /** Counts the number of users that both this user and the other user follow.
     /*  Notice: This is the size of the intersection of the two follows lists. */
