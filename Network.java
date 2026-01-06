@@ -75,21 +75,13 @@ public class Network {
     public String recommendWhoToFollow(String name) {
         String whoToFollow = "";
         User thUser = getUser(name);
-        String[] followingArr = thUser.getfFollows();
-        int following = followingArr.length;
         int maxMutual = 0;
+
         for(int i = 0; i < users.length; i++){
-            if (users[i] != null && !users[i].getName().equals(name)) {
-                int mutual = 0;
-                for(int j = 0; j < following; j++){
-                    if (users[i].follows(followingArr[j])) {
-                        mutual++;
-                    }
-                    if (mutual >= maxMutual){
-                        maxMutual = mutual;
-                        whoToFollow = users[i].getName();
-                    }
-                }
+            int mutual = thUser.countMutual(users[i]);
+            if (mutual > maxMutual) {
+                maxMutual = mutual;
+                whoToFollow = users[i].getName();
             }
         }
         return whoToFollow;
