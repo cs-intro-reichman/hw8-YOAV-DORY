@@ -95,11 +95,11 @@ public class Network {
      *  The user who appears the most in the follow lists of all the users. */
     public String mostPopularUser() {
         int maxFollowers = 0;
-        String mostPopular = "";
+        String mostPopular = null;
         for(int i = 0; i < users.length; i++){
             if (users[i] != null) {
                 int followers = followeeCount(users[i].getName());
-                if (followers >= maxFollowers) {
+                if (followers > maxFollowers) {
                     maxFollowers = followers;
                     mostPopular = users[i].getName();
                 }
