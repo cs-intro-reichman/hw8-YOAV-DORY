@@ -78,10 +78,12 @@ public class Network {
         int maxMutual = 0;
 
         for(int i = 0; i < users.length; i++){
-            int mutual = thUser.countMutual(users[i]);
-            if (mutual > maxMutual) {
-                maxMutual = mutual;
-                whoToFollow = users[i].getName();
+            if(users[i] != null){
+                int mutual = thUser.countMutual(users[i]);
+                if (mutual > maxMutual) {
+                    maxMutual = mutual;
+                    whoToFollow = users[i].getName();
+                }
             }
         }
         return whoToFollow;
