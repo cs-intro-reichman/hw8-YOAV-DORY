@@ -101,17 +101,12 @@ public class Network {
         int maxFollowers = 0;
         String mostPopular = "";
         for(int i = 0; i < users.length; i++){
-            int followers = 0;
-            if (users[i] != null){
-                for(int j = 0; j < users.length; j++){
-                    if (users[j] != null && users[j].follows(users[i].getName())) {
-                        followers++;
-                    }   
+            if (users[i] != null) {
+                int followers = followeeCount(users[i].getName());
+                if (followers >= maxFollowers) {
+                    maxFollowers = followers;
+                    mostPopular = users[i].getName();
                 }
-            }
-            if (followers >= maxFollowers) {
-                maxFollowers = followers;
-                mostPopular = users[i].getName();
             }
         }
         return mostPopular;
